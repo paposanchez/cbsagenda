@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Unlock');
+@import url('https://fonts.googleapis.com/css?family=Gamja+Flower|Unlock');
+@import url('https://fonts.googleapis.com/css?family=Muli');
+.navbar-laravel-red{
+	    background-color: #A60032;
+}
+
+.navbar-brand{
+	text-decoration-color:#ffff;
+	font-family: 'Unlock', cursive;
+}
+
+
+
+.navbar-nav .nav-link {
+    color: rgba(1,5,4,.5);
+    font-family: 'Unlock', cursive;
+}
+
+.table, .table-striped, .table-bordered {
+	font-family: 'Muli', sans-serif;
+
+}
+
+.link {
+	color: #A60032;
+
+}
+
+}
+
+.colortable{
+	color:#1FA6CC;
+	size: 20px;
+
+}
+
+.danger{
+	color :#a60032;
+	font-size:18px;
+
+}
+
+
+.activo{
+	content:"\f095";
+}
+
+.card {
+    border-radius:0;
+    margin:10px auto;
+}
+

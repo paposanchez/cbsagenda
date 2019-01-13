@@ -1,0 +1,29 @@
+
+
+
+<i class="fas fa-phone"></i> telefono
+<i class="fas fa-mobile-alt"></i> celular 
+Crear un select con estos dos opciones  tabla agendacb
+
+
+ $cia = \App\Compania::find($id);
+
+ User::paginate(10)->onEachSide(5);
+
+
+ $post = Post::where('id', $id);
+$post->delete();
+
+
+
+
+(env)$ deactivate
+$
+
+
+source bin/activate
+
+
+
+
+select comuna.comuna_nombre from asig_comuna inner join comuna on asig_comuna.comuna_id = comuna.comuna_id;
