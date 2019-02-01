@@ -1,23 +1,24 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Compania;
-use App\Cuerpo;
 use App\comuna;
-use App\Ciafono;
-use DB; 
+use App\Provincia;
 
-class CompaniaController extends Controller
+class ComunaController extends Controller
 {
+    
     public function index()
     {
-$compania=Compania::all();
-//dd($compania);
- return view("cia.index",compact('compania'));
+	
 
+   // $comuna=comuna::with('provincia')->find(1101);
+    $proveedor = Provincia::with('comuna')->get();
+//dd($proveedor->comuna);
+	
+ 
+return view("comuna.index",compact('proveedor'));
     }
 
 
@@ -47,7 +48,7 @@ $compania=Compania::all();
             return view('cia.edit',compact('id','comuna','cia'));
     }
 
-   
+ 
 
     public function show($id){
 
@@ -57,30 +58,4 @@ $compania=Compania::all();
         
        return view("cia.show",compact('cia','agenda'));
     }
-
-    // rutas para fono  
-
-// ruta formulario crear fono
- public function fono($id){
-        $cia = \App\Compania::find($id);
-        return view('cia.fono',compact('id','cia'));
-    }
-// se registra el fono en bd.
-    public function fonostore(Request $request)
-    {
-        Ciafono::create($request->all());
-        return redirect('cia');
-    }
-
-
-   public function crearcia ($id)
-   {
-    $comuna=comuna::all();
-    $cuerpo=Cuerpo::all();
-    $cb = \App\Cuerpo::find($id);
-    return view("cia.crear2",compact('cb','comuna','cuerpo'));
-    }
-   
-       
-    
 }

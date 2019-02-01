@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Cuerpo;
 use App\comuna;
 use App\Asig_com;
+use App\zona;
 use DB; 
 use Illuminate\Support\Facades\Storage;
 
@@ -37,8 +38,8 @@ class CuerpoController extends Controller
     public function create()
     {
        $comuna = comuna::orderBy('comuna_nombre', 'ASC')->pluck('comuna_nombre', 'comuna_nombre');
-      
-       return view("cuerpo.crear",compact('comuna'));
+      $zona = zona::orderBy('nombre', 'ASC')->pluck('nombre', 'zona_id');
+       return view("cuerpo.crear",compact('comuna','zona'));
     }
 
     /**
@@ -79,9 +80,21 @@ $request->validate([
             $cuerpo = DB::table('cuerpos')->where('id', '=', $id)->first();  
             $compania=DB::table('companias')->where('cuerpo_id','=',$id)->get();
             $fono=DB::table('agendacb')->where('cuerpo_id','=',$id)->get();
-            $comuna=DB::table('asig_comuna')->where('id_cuerpo','=',$id)->get();
+         
+            $comuna = DB::table('asig_comuna')
+            ->join('comuna', 'asig_comuna.comuna_id', '=', 'comuna.comuna_id')
+            ->select('comuna.comuna_nombre')
+            ->where('id_cuerpo','=',$id)
+            ->get();
+
+            $fonocia = DB::table('agendacia')
+            ->join('compania', 'agendacia.cia_id', '=', 'compania.id')
+            ->join('cuerpos', 'cuerpo.id', '=', 'compania.cuerpo_id')
+            ->select('agenda.numero','compania.nombre','compania.direccion','compania.comuna')
+            ->where('id_cuerpo','=',$id)
+            ->get();
           
-       return view("cuerpo.show",compact('cuerpo','compania','fono','comuna'));
+       return view("cuerpo.show",compact('cuerpo','compania','fono','comuna', 'fonocia'));
 
         
        

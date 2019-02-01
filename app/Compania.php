@@ -16,9 +16,15 @@ class Compania extends Model
         }
 
 
-        public function fono()
+        public function tcuerpo()
         {
            return $this->hasOne('App\Cuerpo');
         }
+
+        public function tcia()
+        {
+           return $this->belongsTo('App\Agendacia');
+        }
+ 
  
 }

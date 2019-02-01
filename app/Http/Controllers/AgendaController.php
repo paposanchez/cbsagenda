@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 Use App\Compania;
 Use App\Cuerpo; 
+use App\claves;
+use App\Asig_com;
 Use DB;
 
 class AgendaController extends Controller
@@ -61,7 +63,7 @@ class AgendaController extends Controller
         $fono=DB::table('agendacb')->where('cuerpo_id','=',$id)->get();
        return view("agenda.show",compact('cuerpo','compania','fono')); 
         
-       $cuerpos=Cuerpo::first();
+      // $cuerpos=Cuerpo::first();
     }
     
 
@@ -97,5 +99,33 @@ class AgendaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+     public function clave()
+    {
+        
+       $claves= Claves::all();
+       
+        
+ return view("agenda.clave",compact('claves'));
+       
+        
+       
+    }
+
+
+     public function comunas()
+    {
+        $users = DB::table('asig_comuna')
+            ->join('cuerpos', 'asig_comuna.id_cuerpo', '=', 'cuerpos.id')
+            ->join('comuna', 'asig_comuna.comuna_id', '=', 'comuna.comuna_id')
+            ->select('comuna.comuna_nombre', 'cuerpos.nombre')
+            ->get();
+
+     
+          
+
+       return view("agenda.comunas",compact('users'));
+
     }
 }

@@ -23,13 +23,21 @@ Route::get('/home', function()
     return view('home', array('nombre' => 'Javi'));
 });
 
-Route::resource('agenda', 'AgendaController');
+
 Route::resource('clave', 'ClavesController');
 
 //Route::resource('cuerpo', 'CuerpoController');
 Route::resource('cia', 'CompaniaController');
+Route::resource('agenda', 'AgendaController');
 Route::resource('agendacia', 'AgendaciaController');
-Route::post('agendacia/{id}/create','Compania@create'); 
+Route::post('agendacia/{id}/create','CompaniaController@create'); 
+Route::get('comuna','ComunaController@index');
+ 
+Route::get('/agenda/{id}','AgendaController@show');  
+Route::get('/agenda/comunas/','AgendaController@comunas');  
+Route::get('/agenda/claves/','AgendaController@clave'); 
+Route::get('/agenda/cuerpo/','AgendaController@cuerpo'); 
+
 Route::get('/cia/crear/{id}','CompaniaController@crearcia'); 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -79,13 +87,21 @@ Route::middleware('auth')->group(function(){
 
 
 
-		// compañias
-		Route::get('cia/fono/{cuerpo}', 'CompaniaController@fono');
-		Route::post('cia/{id}/fono','Compania@fono'); 
+		
+
+
+
 
 });
 
+// compañias fono
+		Route::get('cia/fono/{cuerpo}', 'CompaniaController@fono');
+		Route::post('cia/{id}/fono','CompaniaController@fono'); 
+		
+Route::get('agenda/clave', function () {
+    return view('agenda.clave');
+});
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

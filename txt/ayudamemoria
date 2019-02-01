@@ -27,3 +27,7 @@ source bin/activate
 
 
 select comuna.comuna_nombre from asig_comuna inner join comuna on asig_comuna.comuna_id = comuna.comuna_id;
+
+
+
+// sql region ->provincias ->Comunas

@@ -14,6 +14,10 @@ class Asig_com extends Model
     	$this->belongto('App\Cuerpo');
     }
 
+public function comunas () {
+
+    	$this->belongto('App\comuna');
+    }
     
 
 

@@ -1,76 +1,92 @@
 @extends('layouts.app')
 
 @section('content')
-  
-  <div class="container">
-        <div class="row">
-            <div class="col-md-10">
-<div class="card" >
-  
-
-  <!--<img class="card-img-top" src=".../100px180/" alt="Card image cap">-->
-  <div class="card-body">
-
-    <h1 class="card-title text-center">Cuerpo de Bomberos de {{ $cuerpo->nombre }}</h1>
-    <p class="card-text text-center">Fundacion: {{ $cuerpo->fundacion }}</p>
-    <p class="card-text text-center">Direccion: {{ $cuerpo->direccion }},{{ $cuerpo->comuna }}</p>
-    <p class="card-text text-center">Comuna: {{ $cuerpo->comuna }}</p>
-<p class="card-text text-center">
-  <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Central: </li>
-    @foreach( $fono as $cbfono )
+  <div class="container-fluid">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-7 border-right">
+                        <h5>Cuerpo de Bomberos de {{ $cuerpo->nombre }}</h5>
+                    </div>
+                    <div class="col-md-4">
+                        
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                              <div class="form-group row">
+                                <div class="col-md-12">
+                                  <li class="list-group-item">
+                            <div class="h5">Cuartel General</div>
+                            <div class="h5">Direccion: {{ $cuerpo->direccion  }},{{ $cuerpo->comuna }}</div>
+                            <div class="h5">Comuna: {{ $cuerpo->comuna }}</div>
+                        </li>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="textarea" class="col-12 col-form-label">Central de Alarmas</label> 
+                                <div class="col-12">
+                                  <div class="text-center"> 
+      @foreach( $fono as $cbfono )
         
-        - {{ $cbfono->numero }}  -
- @endforeach
-  </ol>
-</nav>
-  
+      <a class="btn btn-outline-primary" href="#" role="button"><i class="{{ $cbfono->tipo_numero }}"></i><h3>{{ $cbfono->numero }}</h3></a> 
     
-</p>
-  </div>
-</div>
+      @endforeach
+    </div>
+                                </div>
+                              </div> 
+                            
+                    </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="card-header bg-light ">Compañias</div>
+               
+                                   
 
-<div class="card"   >
-  <div class="card-header" style="background-color: #4E93DA">Compañias</div>
-  
-  <div class="card-body">
-   
-<div class="panel panel-default">
-  <div class="panel-body">
-    <table class="table table-striped table-bordered">
+
+                      <table class="table table-striped table-bordered">
     <thead>
         <tr>
             <td>Compañia</td>
             <td>Direccion</td>
             <td>Comuna</td>
+            <td>Teléfono</td>
             
         </tr>
     </thead>
     <tbody>
-    @foreach( $compania as $cia )
-        
-        <tr>
-            <td> {{ $cia->nombre }}</td>       
-            <td>{{ $cia->direccion }}</td>
-            <td>{{ $cia->comuna }} </td>             
+@forelse($compania as $cia2)
+    <tr>
+            <td>{{ $cia2->nombre }}</td>       
+            <td>{{ $cia2->direccion }}</td>
+            <td>{{ $cia2->comuna }} </td>             
+            <td></td>  
 
-            
+               
         </tr>
- @endforeach
-  
-    
-    </tbody>
-   
-</table>
+@empty
+    <tr> Compañias No registradas</tr>
+@endforelse
+                                </div>
+                              </div>
+                              
+                                </div>
+                              </div> 
+                            
+                   
 
-   </div>
+                    
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>  	
-
- 
 
 
 

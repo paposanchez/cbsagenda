@@ -2,50 +2,62 @@
 
 @section('content')
                 
-                <div class="container-fluid gedf-wrapper">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="h5">Cuerpo de Bomberos de {{ $cuerpo->nombre }}</div>
-                        <div class="h7 text-muted">
-                            Fundacion: {{ $cuerpo->fundacion }}
-                
-                        </div>
+<div class="container-fluid">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-7 border-right">
+                        <h5>Cuerpo de Bomberos de {{ $cuerpo->nombre }}</h5>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="h6 text-muted">Cuartel General</div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-sm btn-primary">Add New</button>
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                              <div class="form-group row">
+                                <div class="col-md-12">
+                                  <li class="list-group-item">
+                            <div class="h5">Cuartel General</div>
                             <div class="h5">Direccion: {{ $cuerpo->direccion  }},{{ $cuerpo->comuna }}</div>
                             <div class="h5">Comuna: {{ $cuerpo->comuna }}</div>
                         </li>
-                        <li class="list-group-item">
-                            <div class="h6 text-muted">Central Alarmas</div>
-                            <div class="h5"><div class="text-center"> 
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="textarea" class="col-12 col-form-label">Central de Alarmas</label> 
+                                <div class="col-12">
+                                  <div class="text-center"> 
       @foreach( $fono as $cbfono )
         
-      <a class="btn btn-outline-primary" href="#" role="button"><i class="{{ $cbfono->tipo_numero }}"></i><h1>{{ $cbfono->numero }}</h1></a> 
+      <a class="btn btn-outline-primary" href="#" role="button"><i class="{{ $cbfono->tipo_numero }}"></i><h3>{{ $cbfono->numero }}</h3></a> 
     
       @endforeach
-    </div></div>
-                        </li>
-                        <li class="list-group-item">Redes Sociales</li>
-                        <li class="list-group-item">Facebook</li>
-                    </ul>
-                </div>
-            </div>
-            
+    </div>
+                                </div>
+                              </div> 
 
-               
-                
-
-                <!--- \\\\\\\Compañias-->
-                <div class="card gedf-card">
-                    <div class="card-header">Compañias</div>
-                        <div class="d-flex justify-content-between align-items-center">
-                    
-                    
-                               <table class="table table-striped table-bordered">
+                              <div class="form-group row">
+                                <label for="textarea" class="col-12 col-form-label">Comunas Que Atiende</label> 
+                                <div class="col-12">
+                                  <div class="text-center"> 
+      @foreach( $comuna as $com )
+        
+      <a class="btn btn-outline-primary" href="#" role="button"><h3>{{ $com->comuna_nombre }}</h3></a> 
+    
+      @endforeach
+    </div>
+                                </div>
+                              </div> 
+                            
+                    </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="card-header bg-light ">Compañias</div>
+                                   <table class="table table-striped table-bordered">
     <thead>
         <tr>
             <td>Compañia</td>
@@ -56,12 +68,16 @@
         </tr>
     </thead>
     <tbody>
+    
+        
+ @if (!is_null($compania) && count($compania) > 0)
     @foreach( $compania as $cia )
         
         <tr>
             <td> {{ $cia->nombre }}</td>       
             <td>{{ $cia->direccion }}</td>
-            <td>{{ $cia->comuna }} </td>             
+            <td>{{ $cia->comuna }} </td>   
+             <td>{{ $ciafono->numero }} </td>          
             <td><a href="{{URL::action('CompaniaController@edit',$cia->id)}}" class="badge badge-primary">Editar</a>
               <a href="#" class="badge badge-danger">borrar</a>
               <a href="#" class="badge badge-primary "><i class="fas fa-phone"></i></span>Agregar Telefono</a>
@@ -69,31 +85,26 @@
             
         </tr>
  @endforeach
-  
+  @endif
     
     </tbody>
    
 </table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+                                </div>
+                              </div>
+                              
+                                </div>
+                              </div> 
+                            
+                   
 
-                      
-                 
-                <!-- Post /////-->
-
-
-                
                     
-                
-                
-
-
-
-          
-            
-
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
 @endsection
